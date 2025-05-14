@@ -1,0 +1,32 @@
+{% set version = "1.0.0" %}
+{% set beta_suffix = "" %}
+{% set sha256 = "bdf2a7f68f85bfd6d3b045c4fef6ffaed7af77739798cc8b857ff2fb1bc92748" %}
+
+package:
+  name: unifire
+  version: '{{ version }}'
+
+source:
+  url: https://github.com/cmatKhan/unifire/archive/refs/tags/{{ version }}.tar.gz
+  sha256: '{{ sha256 }}'
+
+build:
+  noarch: generic
+  number: 0
+  run_exports:
+    - {{ pin_subpackage('unifire', max_pin="x") }}
+
+requirements:
+  run:
+    - openjdk 17
+    - maven 3.6.0
+
+test:
+  commands:
+    - 'unifire --help'
+
+about:
+  home: https://github.com/cmatKhan/unifire/
+  license: Apache-2.0
+  license_family: Apache
+  summary: UniFIRE is the official protein annotator from Uniprot. It runs both UniRule and ARBA to assign protein function.
